@@ -25,16 +25,28 @@ const Navbar = () => {
           Mini Spotify&nbsp;
         </h1>
 
-        <ul className="flex space-x-12 text-sm">
-          <li className="flex items-center gap-2 cursor-pointer hover:text-green-400">
+        <ul className="flex text-sm" role="menubar" aria-label="Primary menu">
+          <li
+            className="flex items-center gap-2 cursor-pointer hover:text-green-400 mr-10"
+            role="menuitem"
+            tabIndex={0}
+          >
             <FaHome size={18} />
             <span>Inicio</span>
           </li>
-          <li className="flex items-center gap-2 cursor-pointer hover:text-green-400">
+          <li
+            className="flex items-center gap-2 cursor-pointer hover:text-green-400 mr-10"
+            role="menuitem"
+            tabIndex={0}
+          >
             <FaSearch size={18} />
             <span>Buscar</span>
           </li>
-          <li className="flex items-center gap-2 cursor-pointer hover:text-green-400">
+          <li
+            className="flex items-center gap-2 cursor-pointer hover:text-green-400"
+            role="menuitem"
+            tabIndex={0}
+          >
             <FaHeart size={18} />
             <span>Biblioteca</span>
           </li>
@@ -49,3 +61,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

@@ -1,11 +1,5 @@
-import { useState } from 'react';
-
-type Artist = {
-  id: string;
-  name: string;
-  photo: string;
-  listeners: number; // nuevo campo agregado
-};
+import HoverCard from './HoverCard'; 
+import type { Artist } from '../data/Artists';
 
 type Props = {
   artist: Artist;
@@ -24,13 +18,10 @@ const PlayIcon = () => (
 );
 
 const ArtistCard = ({ artist }: Props) => {
-  const [hover, setHover] = useState(false);
-
   return (
     <a
       href="#"
       style={{
-        position: 'relative',
         display: 'block',
         width: '80px',
         padding: '8px',
@@ -38,50 +29,18 @@ const ArtistCard = ({ artist }: Props) => {
         textDecoration: 'none',
         cursor: 'pointer',
       }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
     >
-      <div
+      <HoverCard
+        image={artist.photo}
         style={{
+          borderRadius: '50%',
           width: '80px',
           height: '80px',
-          position: 'relative',
           margin: '0 auto',
-          borderRadius: '50%',
-          overflow: 'hidden',
-          transform: hover ? 'scale(1.1)' : 'scale(1)',
-          transition: 'transform 0.3s ease',
         }}
       >
-        <img
-          src={artist.photo}
-          alt={artist.name}
-          style={{
-            width: '80px',
-            height: '80px',
-            objectFit: 'cover',
-            display: 'block',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '80px',
-            height: '80px',
-            backgroundColor: 'rgba(0,0,0,0.4)',
-            opacity: hover ? 1 : 0,
-            transition: 'opacity 0.3s ease',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '50%',
-          }}
-        >
-          <PlayIcon />
-        </div>
-      </div>
+        <PlayIcon />
+      </HoverCard>
 
       <h3
         style={{
@@ -115,6 +74,3 @@ const ArtistCard = ({ artist }: Props) => {
 };
 
 export default ArtistCard;
-
-
-
