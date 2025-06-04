@@ -36,4 +36,22 @@ export const artists: Artist[] = [
     photo: 'https://imgs.search.brave.com/pB0CkOdOxTFhVRgMHLq7AXLwLTJczbTRtYLbPq83Y-o/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20venByTXh3/dFR1T054WUh1ZWE3/ZE4tdExjZnVGcDBN/NDNUdlVHeFB2bFJZ/QS9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTlz/WVhOMC9abTB1Wm5K/bFpYUnNjeTVtL1lY/TjBiSGt1Ym1WMEwy/a3YvZFM4MU1EQjRO/VEF3THpJNS9PREkz/TlRsbU5qTTNZVEl4/L05tTTFOREEyWlRK/bE9HRm0vTVRKak1E/QTNMbXB3Wnc',
     listeners: 95000000,
   },
+  {
+    id: '6',
+    name: 'Lali',
+    photo: 'https://imgs.search.brave.com/YWsMCK7Qb9BPxkWztdKAq52z9qe_a42NzAM4mLYcA5E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9yZXNp/emVyLmdsYW5hY2lv/bi5jb20vcmVzaXpl/ci92Mi9sYWxpLWVz/cG9zaXRvLWhhYmxv/LWRlLXN1LXJlbGFj/aW9uLWNvbi1tYXJj/ZWxhLWxhLVpPSEwy/M1dBWFJDRDdDTkE0/RExMQ1FKVk5RLmpw/Zz9hdXRoPTg2MWJl/NzhhOTQ3NzI4ODli/NWVkZTg1NTcxOTky/NzM5NmUxMTk1ZjMx/ZTMyYWY5NTViM2I5/MjBiNDc3M2NlNzMm/d2lkdGg9MzAwJmhl/aWdodD0yMDAmcXVh/bGl0eT03MCZzbWFy/dD10cnVl',
+    listeners: 100,
+  },
+  {
+    id: '7',
+    name: 'Elton John',
+    photo: 'https://imgs.search.brave.com/yRx7eswByZrebedvWu6WHf-K_ltv9a_MebgdSbHef5M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dXNtYWdhemluZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjQvMDQvMS1FbHRv/bi1Kb2huLVRocm91/Z2gtdGhlLVllYXJz/LmpwZz93PTkwMCZx/dWFsaXR5PTg2JnN0/cmlwPWFsbA',
+    listeners: 95000000,
+  },
+  {
+    id: '8',
+    name: 'Shakira',
+    photo: 'https://imgs.search.brave.com/q9WawaVyNkn9x2vGqVDzVUMjX6flwQtDVSGTF_NWyUo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTY4/MTIxMzcxNS9waG90/by9uZXdhcmstbmV3/LWplcnNleS1zaGFr/aXJhLWF0dGVuZHMt/dGhlLTIwMjMtdmlk/ZW8tbXVzaWMtYXdh/cmRzLWF0LXBydWRl/bnRpYWwtY2VudGVy/LW9uLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1kR1FsVXV1/X2JlSk9yb0VBMTlt/ejRMQ3RZZzRSd21B/dUNadUxTTnNyd0pN/PQ',
+    listeners: 95000000,
+  },
 ];

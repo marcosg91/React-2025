@@ -1,20 +1,24 @@
+// Importar el componente HoverCard
 import HoverCard from './HoverCard';
 
+// Define el tipo de objeto Playlist, con propiedades necesarias
 type Playlist = {
   id: string;
   title: string;
-  cover: string;
-  description: string;
+  cover: string;       // URL de la imagen de portada
+  description: string; 
 };
 
+// Definir los props que recibe el componente
 type Props = {
   playlist: Playlist;
 };
 
+// Componente funcional PlaylistCard
 const PlaylistCard = ({ playlist }: Props) => {
   return (
     <HoverCard
-      image={playlist.cover}
+      image={playlist.cover} // Imagen de fondo del hover
       style={{
         borderRadius: '8px',
         width: '100%',
@@ -22,28 +26,26 @@ const PlaylistCard = ({ playlist }: Props) => {
         display: 'flex',
         alignItems: 'center',
         cursor: 'pointer',
-        textDecoration: 'none',
+        textDecoration: 'none', 
       }}
-      // si HoverCard tiene un "as" para cambiar etiqueta a <a>, mejor, sino lo podés envolver luego
     >
-      {/* Dentro va todo el contenido, no solo la imagen */}
-
-      {/* Imagen */}
+      {/* Imagen de la playlist */}
       <img
         src={playlist.cover}
         alt={playlist.title}
         style={{
           width: '80px',
           height: '80px',
-          objectFit: 'cover',
+          objectFit: 'cover',   
           borderRadius: '8px',
-          marginRight: '12px',
-          flexShrink: 0,
+          marginRight: '12px',  
+          flexShrink: 0,        
         }}
       />
 
-      {/* Texto */}
+      {/* Contenedor del texto (título y descripción) */}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {/* Título de la playlist */}
         <h3
           style={{
             color: 'white',
@@ -54,11 +56,13 @@ const PlaylistCard = ({ playlist }: Props) => {
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            maxWidth: 'calc(100% - 80px - 12px)', // para evitar overflow
+            maxWidth: 'calc(100% - 80px - 12px)', 
           }}
         >
           {playlist.title}
         </h3>
+
+        {/* Descripción */}
         <p
           style={{
             color: '#d1d5db',
@@ -77,5 +81,4 @@ const PlaylistCard = ({ playlist }: Props) => {
   );
 };
 
-export default PlaylistCard;
-
+export default PlaylistCard; 
