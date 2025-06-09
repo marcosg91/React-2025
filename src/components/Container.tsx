@@ -1,23 +1,25 @@
-// Importar React
-import React from 'react';
+import * as React from 'react';
 
-// Definir las props que acepta el componente Container.
-// children es todo lo que se pasa dentro del componente cuando se usa.
 type ContainerProps = {
-  children: React.ReactNode; // Permite que el contenedor reciba cualquier elemento JSX como hijo
+  title: string;
+  children: React.ReactNode;
 };
 
-// Componente funcional Container que envuelve a sus hijos con estilos de padding y ancho máximo
-const Container = ({ children }: ContainerProps) => {
+// Contenedor reutilizable para cada listado con título y separación
+const Container = ({ title, children }: ContainerProps) => {
   return (
-    // Aplica padding (p-4), ancho máximo (max-w-4xl) y centra el contenido horizontalmente (mx-auto)
-    <div className="p-4 max-w-4xl mx-auto">
-      {children} {/* Renderiza los elementos hijos que se le pasen */}
-    </div>
+    <section className="mb-8">
+      {/* Título de la sección */}
+      <h2 className="text-2xl font-bold mb-4">{title}</h2>
+
+      {/* Contenido de la sección */}
+      <div className="p-4">
+        {children}
+      </div>
+    </section>
   );
 };
 
-export default Container; 
-
+export default Container;
 
    
