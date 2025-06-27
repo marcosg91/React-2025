@@ -2,70 +2,66 @@ import { FaHome, FaSearch, FaHeart } from "react-icons/fa";
 import { useMemo } from 'react';
 
 const Navbar = () => {
-  // Memoizar la animación para prevenir recálculos
   const glowAnimation = useMemo(() => `
     @keyframes subtle-glow {
-      0%, 100% { text-shadow: 0 0 5px #34d399; }
-      50% { text-shadow: 0 0 10px #10b981; }
+      0%, 100% { text-shadow: 0 0 5px #1DB954; }
+      50% { text-shadow: 0 0 10px #1ED760; }
     }
   `, []);
 
   return (
     <>
       <style>{glowAnimation}</style>
-      
+
       <nav 
-        className="bg-gray-800 text-white p-4 flex items-center justify-between"
+        className="bg-[#121212] px-6 py-4 flex items-center justify-between border-b border-[#2a2a2a]"
         aria-label="Navegación principal"
       >
         <h1
           style={{ animation: 'subtle-glow 2.5s ease-in-out infinite' }}
-          className="font-bold text-lg"
+          className="text-2xl font-bold tracking-wide text-white"
           aria-label="Mini Spotify"
         >
           Mini Spotify
         </h1>
 
-        <ul className="flex text-sm" role="menubar">
-          <li role="none">
+        <ul className="flex items-center space-x-8 list-none text-base font-medium text-white">
+          <li>
             <a
               href="#"
-              className="flex items-center gap-2 hover:text-green-400 mr-10"
-              role="menuitem"
+              className="flex items-center gap-2 text-white no-underline hover:text-[#1DB954] transition-colors"
               aria-label="Ir a Inicio"
             >
-              <FaHome size={18} />
+              <FaHome size={20} />
               <span>Inicio</span>
             </a>
           </li>
-          
-          <li role="none">
+
+          <li>
             <a
               href="#"
-              className="flex items-center gap-2 hover:text-green-400 mr-10"
-              role="menuitem"
+              className="flex items-center gap-2 text-white no-underline hover:text-[#1DB954] transition-colors"
               aria-label="Buscar contenido"
             >
-              <FaSearch size={18} />
+              <FaSearch size={20} />
               <span>Buscar</span>
             </a>
           </li>
-          
-          <li role="none">
+
+          <li>
             <a
               href="#"
-              className="flex items-center gap-2 hover:text-green-400"
-              role="menuitem"
+              className="flex items-center gap-2 text-white no-underline hover:text-[#1DB954] transition-colors"
               aria-label="Ver biblioteca"
             >
-              <FaHeart size={18} />
+              <FaHeart size={20} />
               <span>Biblioteca</span>
             </a>
           </li>
         </ul>
 
         <button 
-          className="bg-green-500 hover:bg-green-600 px-4 py-1 rounded text-sm font-semibold transition-colors"
+          className="bg-[#1DB954] hover:bg-[#1ed760] text-black font-semibold px-5 py-2 rounded-lg text-sm transition-all"
           aria-label="Iniciar sesión"
         >
           Login

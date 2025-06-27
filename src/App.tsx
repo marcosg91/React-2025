@@ -1,66 +1,77 @@
+import { useState, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import Container from './components/Container';
-
 import SongList from './components/sections/SongList';
 import AlbumList from './components/sections/AlbumList';
 import PlaylistList from './components/sections/PlaylistList';
 import ArtistList from './components/sections/ArtistList';
-
+import Player from './components/Player';
+import { usePlayer } from './hooks/usePlayer';
 import { songs } from './data/Songs';
+import type { Song } from './data/Songs';
 import { albums } from './data/Albums';
 import { playlists } from './data/Playlists';
 import { artists } from './data/Artists';
 
 const App = () => {
+  const {
+    currentSong,
+    isPlaying,
+    progress,
+    volume,
+    playSong,
+    togglePlayPause,
+    handleSeek,
+    setVolume,
+    handleStop,
+    handleClose,
+  } = usePlayer();
+
+  const [showPlayer, setShowPlayer] = useState(false);
+
+  const handleSongSelect = useCallback((song: Song) => {
+    playSong(song);
+    setShowPlayer(true);
+  }, [playSong]);
+
+  const closePlayer = useCallback(() => {
+    handleClose();
+    setShowPlayer(false);
+  }, [handleClose]);
+
   return (
-    <div 
-      className="flex min-h-screen bg-neutral-900 text-white"
-      role="application"
-      aria-label="Aplicación de música Mini Spotify"
-    >
-      {/* Navbar lateral para pantallas grandes */}
-      <aside 
-        className="hidden lg:block lg:w-64 bg-neutral-950 p-4 border-r border-neutral-800"
-        aria-label="Navegación principal"
-      >
+    <div className="flex min-h-screen bg-[#121212] text-white pb-20">
+      {/* Sidebar (Desktop) */}
+      <aside className="hidden lg:block lg:w-64 bg-black p-4 border-r border-neutral-800">
         <Navbar />
       </aside>
 
       {/* Contenido principal */}
       <div className="flex-1 flex flex-col">
-        {/* Navbar superior para pantallas chicas */}
-        <div 
-          className="lg:hidden bg-neutral-950 p-4 border-b border-neutral-800"
-          aria-label="Navegación móvil"
-        >
+        {/* Navbar móvil */}
+        <div className="lg:hidden bg-black p-4 border-b border-neutral-800">
           <Navbar />
         </div>
 
-        <main 
-          className="p-6 flex-1 overflow-y-auto"
-          aria-label="Contenido principal"
-        >
+        <main className="p-6 flex-1 overflow-y-auto">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Columna principal */}
             <div className="flex-1 space-y-8">
-              <Container title="Canciones" aria-label="Lista de canciones">
-                <SongList songs={songs} />
+              <Container title="Canciones">
+                <SongList songs={songs} onSongSelect={handleSongSelect} />
               </Container>
 
-              <Container title="Álbumes" aria-label="Lista de álbumes">
+              <Container title="Álbumes">
                 <AlbumList albums={albums} />
               </Container>
 
-              <Container title="Playlists" aria-label="Lista de playlists">
+              <Container title="Playlists">
                 <PlaylistList playlists={playlists} />
               </Container>
             </div>
 
             {/* Columna derecha: Artistas */}
-            <div 
-              className="w-full lg:w-[320px] xl:w-[380px] space-y-8"
-              aria-label="Lista de artistas"
-            >
+            <div className="lg:w-[320px] space-y-8">
               <Container title="Artistas">
                 <ArtistList artists={artists} />
               </Container>
@@ -68,6 +79,21 @@ const App = () => {
           </div>
         </main>
       </div>
+
+      {/* Player fijo abajo */}
+      {showPlayer && currentSong && (
+        <Player
+          currentSong={currentSong}
+          isPlaying={isPlaying}
+          progress={progress}
+          volume={volume}
+          onPlayPause={togglePlayPause}
+          onSeek={handleSeek}
+          onVolumeChange={setVolume}
+          onStop={handleStop}
+          onClose={closePlayer}
+        />
+      )}
     </div>
   );
 };
