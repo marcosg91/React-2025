@@ -21,5 +21,3 @@ const Container = ({ title, children }: ContainerProps) => {
 };
 
 export default Container;
-
-   

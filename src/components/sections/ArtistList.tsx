@@ -8,19 +8,18 @@ type Props = {
 const ArtistList = ({ artists }: Props) => {
   return (
     <div 
-      className="flex flex-col gap-4 overflow-y-auto max-h-[70vh] min-h-[200px] pr-2"
+      className="flex flex-col gap-4 overflow-y-auto max-h-[70vh] min-h-[200px] pr-2 scrollbar-custom"
       style={{ 
         scrollbarWidth: 'thin',
-        scrollbarColor: '#4ade80 #1e293b'
+        scrollbarColor: '#1DB954 #181818'
       }}
     >
       {artists.map(artist => (
         <ArtistCard key={artist.id} artist={artist} />
       ))}
       
-      {/* Mensaje para listas vacías */}
       {artists.length === 0 && (
-        <p className="text-center text-neutral-400 py-8">
+        <p className="text-center text-[#b3b3b3] py-8">
           No se encontraron artistas
         </p>
       )}
