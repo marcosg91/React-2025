@@ -5,15 +5,22 @@ type ContainerProps = {
   children: React.ReactNode;
 };
 
-// Contenedor reutilizable para cada listado con título y separación
 const Container = ({ title, children }: ContainerProps) => {
   return (
-    <section className="mb-8">
-      {/* Título de la sección */}
-      <h2 className="text-2xl font-bold mb-4">{title}</h2>
+    <section className="mb-10 px-1">
+      {/* Título */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-bold text-white tracking-wide hover:underline cursor-pointer">
+          {title}
+        </h2>
+        {/* Botón opcional de "Ver más" o acciones futuras */}
+        {/* <button className="text-sm text-text-secondary hover:underline hover:text-white">
+          Ver más
+        </button> */}
+      </div>
 
-      {/* Contenido de la sección */}
-      <div className="p-4">
+      {/* Contenido */}
+      <div className="grid gap-4">
         {children}
       </div>
     </section>
@@ -21,5 +28,3 @@ const Container = ({ title, children }: ContainerProps) => {
 };
 
 export default Container;
-
-   

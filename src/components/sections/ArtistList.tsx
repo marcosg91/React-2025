@@ -7,20 +7,26 @@ type Props = {
 
 const ArtistList = ({ artists }: Props) => {
   return (
-    <div 
-      className="flex flex-col gap-4 overflow-y-auto max-h-[70vh] min-h-[200px] pr-2"
-      style={{ 
-        scrollbarWidth: 'thin',
-        scrollbarColor: '#4ade80 #1e293b'
-      }}
-    >
-      {artists.map(artist => (
-        <ArtistCard key={artist.id} artist={artist} />
-      ))}
-      
-      {/* Mensaje para listas vacías */}
-      {artists.length === 0 && (
-        <p className="text-center text-neutral-400 py-8">
+    <div className="relative">
+      {/* Gradientes visuales */}
+      <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+
+      {artists.length > 0 ? (
+        <div className="overflow-x-auto scrollbar-hidden">
+          <div className="flex gap-8 px-6 pb-6">
+            {artists.map((artist) => (
+              <div
+                key={artist.id}
+                className="min-w-[140px] max-w-[140px] flex-shrink-0"
+              >
+                <ArtistCard artist={artist} />
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <p className="text-center text-text-secondary py-8">
           No se encontraron artistas
         </p>
       )}

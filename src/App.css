@@ -1,42 +1,127 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ======= TAILWIND SETUP ======= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ======= VARIABLES GLOBALES ======= */
+:root {
+  --primary: #1db954;
+  --primary-dark: #1ed760;
+  --background: #121212;
+  --card-bg: #181818;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --hover-bg: #282828;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* ======= HTML & BODY ======= */
+html, body {
+  height: 100%;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  @apply bg-[var(--background)] text-[var(--text-primary)] font-sans antialiased;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* ======= ANIMACIONES ======= */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 10s linear infinite;
+}
+
+.animate-scroll {
+  animation: scroll-left 40s linear infinite;
+}
+
+/* ======= NAVBAR ======= */
+.navbar {
+  @apply bg-black py-4 px-6 flex items-center justify-between border-b border-neutral-800;
+}
+
+.nav-title {
+  @apply font-bold text-xl text-[var(--primary)];
+  /* Eliminado el glow para estilo más limpio */
+}
+
+.nav-link {
+  @apply flex items-center gap-4 text-[var(--text-secondary)] hover:text-[var(--primary)] mx-4 transition-colors;
+}
+
+.nav-button {
+  @apply bg-[var(--primary)] hover:bg-[var(--primary-dark)] px-4 py-1.5 rounded-full text-sm font-semibold transition-colors shadow;
+}
+
+/* ======= CARDS ======= */
 .card {
-  padding: 2em;
+  @apply bg-[var(--card-bg)] rounded-lg p-4 transition-all duration-300 hover:bg-[var(--hover-bg)] cursor-pointer;
 }
 
-.read-the-docs {
-  color: #888;
+.card-hover {
+  @apply absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center;
+}
+
+/* ======= PLAYER ======= */
+.player-container {
+  @apply fixed bottom-0 left-0 right-0 bg-neutral-800 h-20 border-t-2 border-[var(--primary)] z-50 flex items-center px-6;
+}
+
+.progress-bar {
+  @apply w-full h-1.5 rounded-full bg-gray-700 accent-[var(--primary)] cursor-pointer;
+}
+
+/* ======= CONTENEDORES ======= */
+.section-container {
+  @apply mb-8;
+}
+
+.section-header {
+  @apply flex items-center justify-between mb-4;
+}
+
+.section-title {
+  @apply text-xl font-bold hover:underline cursor-pointer;
+}
+
+.section-button {
+  @apply text-[var(--text-secondary)] text-sm font-semibold hover:text-white hover:underline;
+}
+
+/* ======= SCROLLBAR ======= */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--card-bg);
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 3px;
+}
+
+/* ======= OCULTAR SCROLLBAR PARA CARRUSELES ======= */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* ======= CARRUSEL CONTENEDOR ======= */
+.carousel-container {
+  @apply overflow-hidden relative;
 }

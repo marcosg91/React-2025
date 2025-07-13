@@ -1,14 +1,14 @@
-type PlayIconProps = {
+type StopIconProps = {
   size?: number;
   color?: string;
   className?: string; 
 };
 
-const PlayIcon = ({ 
+const StopIcon = ({ 
   size = 60, 
   color = 'white',
   className = '' 
-}: PlayIconProps) => (
+}: StopIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"  
     viewBox="0 0 24 24"                  
@@ -17,8 +17,8 @@ const PlayIcon = ({
     height={`${size}px`}
     className={className} 
   >
-    <path d="M8 5v14l11-7z" />
+    <rect x="6" y="6" width="12" height="12" rx="2" />
   </svg>
 );
 
-export default PlayIcon;
+export default StopIcon;

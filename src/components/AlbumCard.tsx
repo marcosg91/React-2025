@@ -1,47 +1,42 @@
-// Importar componente para dar el efecto Hover.
 import HoverCard from './HoverCard';
-
-// Importar componente para el icono play.
 import PlayIcon from './icons/PlayIcon';
-
-// Importar el tipo Album para definir correctamente las props del componente.
 import type { Album } from '../data/Albums';
 
-// Definir el tipo de las props que recibe el componente AlbumCard.
 type Props = {
-  album: Album; // El componente espera un objeto album con datos como cover, title y year.
+  album: Album;
 };
 
-// Componente principal que representa una tarjeta de álbum.
 const AlbumCard = ({ album }: Props) => {
   return (
     <a
       href="#"
-      className="relative block w-[80px] p-2 bg-transparent no-underline cursor-pointer"
+      className="block w-[160px] cursor-pointer no-underline group transition-transform duration-200 hover:scale-105 text-white"
     >
-      {/* HoverCard muestra la carátula del álbum con un ícono de reproducción encima */}
-      <HoverCard image={album.cover}>
-        <PlayIcon />
-      </HoverCard>
+      {/* Imagen del álbum con hover */}
+      <div className="relative w-full h-[160px] rounded-xl overflow-hidden shadow-md">
+        <HoverCard
+          image={album.cover}
+          style={{
+            width: '100%',
+            height: '100%',
+            borderRadius: '0.75rem',
+          }}
+        >
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="bg-[#1DB954] p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <PlayIcon size={28} className="text-white" />
+            </div>
+          </div>
+        </HoverCard>
+      </div>
 
-      {/* Título del álbum, centrado, con texto truncado si es largo */}
-      <h3
-        className="font-semibold text-[0.75rem] text-center truncate w-[80px] mt-2 mb-0"
-        style={{ color: 'white' }}
-      >
-        {album.title}
-      </h3>
-
-      {/* Año del álbum, también centrado y truncado */}
-      <p
-        className="text-[0.65rem] text-center truncate w-[80px] mt-0.5 mb-0"
-        style={{ color: 'white' }}
-      >
-        {album.year}
-      </p>
+      {/* Info del álbum */}
+      <div className="mt-3">
+        <h3 className="font-semibold text-sm truncate">{album.title}</h3>
+        <p className="text-[#b3b3b3] text-xs truncate mt-1">{album.year}</p>
+      </div>
     </a>
   );
 };
-
 
 export default AlbumCard;
