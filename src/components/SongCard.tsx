@@ -10,33 +10,33 @@ type Props = {
 const SongCard = ({ song, onClick }: Props) => {
   return (
     <div 
-      className="block w-[180px] p-4 bg-transparent cursor-pointer transition-transform hover:scale-[1.03] group"
+      className="w-full max-w-[180px] mx-auto cursor-pointer transition-transform duration-200 hover:scale-105 group"
       onClick={onClick}
     >
-      {/* Contenedor de imagen cuadrada con efecto hover */}
-      <div className="w-[160px] h-[160px] mx-auto rounded-lg overflow-hidden">
+      {/* Imagen con hover y botón */}
+      <div className="relative w-full h-[180px] rounded-xl overflow-hidden shadow-lg">
         <HoverCard
           image={song.image}
           style={{
             width: '100%',
             height: '100%',
-            borderRadius: '0.5rem'
+            borderRadius: '0.75rem'
           }}
         >
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-[#1DB954] text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="bg-[#1DB954] p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <PlayIcon size={28} className="text-white" />
             </div>
           </div>
         </HoverCard>
       </div>
 
-      {/* Información de la canción */}
-      <div className="mt-4 text-center">
-        <h3 className="font-semibold text-white text-base truncate">
+      {/* Título y artista */}
+      <div className="mt-3 text-center">
+        <h3 className="text-white font-semibold text-sm truncate">
           {song.title}
         </h3>
-        <p className="text-[#b3b3b3] text-sm truncate mt-1">
+        <p className="text-[#b3b3b3] text-xs truncate mt-1">
           {song.artist}
         </p>
       </div>

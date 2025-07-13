@@ -1,12 +1,14 @@
 import { useState, useMemo } from 'react';
-import type { ReactNode, CSSProperties } from 'react';
+import type { ReactNode, CSSProperties, KeyboardEvent } from 'react';
 
 type Props = {
-  image: string; 
-  children: ReactNode; 
-  style?: CSSProperties; 
-  hoverScale?: number; 
-  overlayColor?: string; 
+  image: string;
+  children: ReactNode;
+  style?: CSSProperties;
+  hoverScale?: number;
+  overlayColor?: string;
+  className?: string;
+  onClick?: () => void;
 };
 
 const HoverCard = ({
@@ -14,11 +16,12 @@ const HoverCard = ({
   children,
   style,
   hoverScale = 1.05,
-  overlayColor = 'rgba(0,0,0,0.4)', 
+  overlayColor = 'rgba(0,0,0,0.4)',
+  className = '',
+  onClick,
 }: Props) => {
   const [hover, setHover] = useState(false);
-  
-  // Memoizar estilos para evitar re-renders innecesarios
+
   const containerStyle = useMemo((): CSSProperties => ({
     position: 'relative',
     width: style?.width || '80px',
@@ -28,8 +31,9 @@ const HoverCard = ({
     margin: style?.margin || '0 auto',
     transform: hover ? `scale(${hoverScale})` : 'scale(1)',
     transition: 'transform 0.2s ease',
+    cursor: onClick ? 'pointer' : 'default',
     ...style,
-  }), [hover, hoverScale, style]);
+  }), [hover, hoverScale, style, onClick]);
 
   const overlayStyle = useMemo((): CSSProperties => ({
     position: 'absolute',
@@ -46,12 +50,23 @@ const HoverCard = ({
     borderRadius: style?.borderRadius || '8px',
   }), [hover, overlayColor, style?.borderRadius]);
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
     <div
+      className={className}
       style={containerStyle}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      aria-hidden="true"
+      onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={onClick ? handleKeyDown : undefined}
     >
       <img
         src={image}

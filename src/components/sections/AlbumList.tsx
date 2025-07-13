@@ -1,31 +1,30 @@
+import { useRef, useEffect } from 'react';
 import AlbumCard from '../AlbumCard';
 import type { Album } from '../../data/Albums';
-import { useRef, useEffect } from 'react';
 
 type Props = {
   albums: Album[];
 };
 
 const AlbumList = ({ albums }: Props) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
-  const scrollSpeed = 30; // Píxeles por segundo
+  const scrollSpeed = 0.5; // píxeles por frame (~30px/s)
 
   useEffect(() => {
-    const container = scrollContainerRef.current;
+    const container = scrollRef.current;
     if (!container || albums.length === 0) return;
 
-    let position = 0;
-    const containerWidth = container.scrollWidth / 2;
-
     const animate = () => {
-      position += scrollSpeed / 60;
-      
-      if (position >= containerWidth) {
-        position = 0;
+      if (!container) return;
+
+      container.scrollLeft += scrollSpeed;
+
+      // si llegó al final, vuelve al inicio
+      if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
+        container.scrollLeft = 0;
       }
-      
-      container.style.transform = `translateX(-${position}px)`;
+
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -38,21 +37,18 @@ const AlbumList = ({ albums }: Props) => {
     };
   }, [albums]);
 
-  // Duplicamos los álbumes para el efecto de carrusel infinito
-  const duplicatedAlbums = [...albums, ...albums];
-
   return (
-    <div className="overflow-hidden relative">
-      {/* Degradados laterales */}
-      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#121212] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none" />
+    <div className="relative">
+      {/* Gradientes laterales */}
+      <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-      <div 
-        ref={scrollContainerRef}
-        className="flex gap-4 w-max"
+      <div
+        ref={scrollRef}
+        className="flex gap-4 overflow-x-auto scrollbar-hidden"
       >
-        {duplicatedAlbums.map((album, index) => (
-          <div key={`${album.id}-${index}`} className="w-48 flex-shrink-0">
+        {albums.map((album) => (
+          <div key={album.id} className="w-[160px] flex-shrink-0">
             <AlbumCard album={album} />
           </div>
         ))}

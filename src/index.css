@@ -12,40 +12,42 @@
   --hover-bg: #282828;
 }
 
+/* ==== Asegurar altura completa ==== */
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  position: relative;
+}
+
 body {
   background-color: var(--background);
   color: var(--text-primary);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ANIMACIONES */
-@keyframes marquee {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+/* ==== Enlaces ==== */
+a,
+a:visited {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-@keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+a:hover {
+  color: var(--primary);
 }
 
-.animate-marquee {
-  display: inline-block;
-  white-space: nowrap;
-  animation: marquee 10s linear infinite;
-}
-
-.animate-scroll {
-  animation: scroll-left 40s linear infinite;
-}
-
-/* SCROLLBAR */
+/* ==== Scrollbar ==== */
 .scrollbar-custom {
   scrollbar-width: thin;
   scrollbar-color: var(--primary) var(--card-bg);
 }
 
 .scrollbar-custom::-webkit-scrollbar {
+  height: 6px;
   width: 6px;
 }
 
@@ -54,7 +56,16 @@ body {
   border-radius: 3px;
 }
 
-/* EFECTOS GLOBALES */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==== Tarjetas efecto vidrio ==== */
 .glass-card {
   background-color: var(--card-bg);
   border-radius: 0.5rem;
@@ -66,7 +77,7 @@ body {
   background-color: var(--hover-bg);
 }
 
-/* Títulos con efecto de brillo sutil */
+/* ==== Efecto Glow (opcional) ==== */
 .text-glow {
   text-shadow: 0 0 5px rgba(30, 215, 96, 0.5);
 }

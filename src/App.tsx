@@ -40,22 +40,23 @@ const App = () => {
   }, [handleClose]);
 
   return (
-    <div className="flex min-h-screen bg-[#121212] text-white pb-20">
-      {/* Sidebar (Desktop) */}
-      <aside className="hidden lg:block lg:w-64 bg-black p-4 border-r border-neutral-800">
+    <div className="flex min-h-screen bg-background text-text-primary font-spotify">
+      {/* Sidebar fija (desktop) */}
+      <aside className="hidden lg:block fixed top-0 bottom-[80px] left-0 w-[240px] bg-black p-4 border-r border-neutral-800 z-40 overflow-y-auto">
         <Navbar />
       </aside>
 
-      {/* Contenido principal */}
-      <div className="flex-1 flex flex-col">
+      {/* Contenido principal con margen lateral y espacio inferior para el player */}
+      <div className="flex-1 flex flex-col lg:ml-[240px] pb-[80px] relative">
         {/* Navbar móvil */}
-        <div className="lg:hidden bg-black p-4 border-b border-neutral-800">
+        <div className="lg:hidden bg-black p-4 border-b border-neutral-800 sticky top-0 z-30">
           <Navbar />
         </div>
 
-        <main className="p-6 flex-1 overflow-y-auto">
+        {/* Contenido con scroll vertical */}
+        <main className="flex-1 overflow-y-auto p-6 scrollbar-custom">
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Columna principal */}
+            {/* Columna izquierda */}
             <div className="flex-1 space-y-8">
               <Container title="Canciones">
                 <SongList songs={songs} onSongSelect={handleSongSelect} />
@@ -70,7 +71,7 @@ const App = () => {
               </Container>
             </div>
 
-            {/* Columna derecha: Artistas */}
+            {/* Columna derecha */}
             <div className="lg:w-[320px] space-y-8">
               <Container title="Artistas">
                 <ArtistList artists={artists} />
@@ -80,7 +81,7 @@ const App = () => {
         </main>
       </div>
 
-      {/* Player fijo abajo */}
+      {/* Player inferior fijo */}
       {showPlayer && currentSong && (
         <Player
           currentSong={currentSong}

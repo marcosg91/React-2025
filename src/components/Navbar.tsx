@@ -1,73 +1,45 @@
 import { FaHome, FaSearch, FaHeart } from "react-icons/fa";
-import { useMemo } from 'react';
 
 const Navbar = () => {
-  const glowAnimation = useMemo(() => `
-    @keyframes subtle-glow {
-      0%, 100% { text-shadow: 0 0 5px #1DB954; }
-      50% { text-shadow: 0 0 10px #1ED760; }
-    }
-  `, []);
-
   return (
-    <>
-      <style>{glowAnimation}</style>
+    <nav 
+      className="bg-black/70 backdrop-blur-lg px-8 py-4 flex items-center justify-between border-b border-neutral-800 sticky top-0 z-50 shadow-md font-spotify"
+      aria-label="Navegación principal"
+    >
+      {/* Título con ícono musical 🎵 */}
+      <h1 className="text-2xl font-bold tracking-wide text-white flex items-center gap-2">
+        <span role="img" aria-label="Música">🎵</span> Mini Spotify
+      </h1>
 
-      <nav 
-        className="bg-[#121212] px-6 py-4 flex items-center justify-between border-b border-[#2a2a2a]"
-        aria-label="Navegación principal"
+      {/* Menú de navegación */}
+      <ul className="flex items-center space-x-14 list-none text-base font-medium text-white">
+        <li>
+          <a href="#" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <FaHome size={18} />
+            <span>Inicio</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <FaSearch size={18} />
+            <span>Buscar</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <FaHeart size={18} />
+            <span>Biblioteca</span>
+          </a>
+        </li>
+      </ul>
+
+      {/* Botón login */}
+      <button
+        className="bg-primary hover:bg-primary-dark text-black font-semibold px-5 py-2 rounded-full text-sm transition-all shadow"
       >
-        <h1
-          style={{ animation: 'subtle-glow 2.5s ease-in-out infinite' }}
-          className="text-2xl font-bold tracking-wide text-white"
-          aria-label="Mini Spotify"
-        >
-          Mini Spotify
-        </h1>
-
-        <ul className="flex items-center space-x-8 list-none text-base font-medium text-white">
-          <li>
-            <a
-              href="#"
-              className="flex items-center gap-2 text-white no-underline hover:text-[#1DB954] transition-colors"
-              aria-label="Ir a Inicio"
-            >
-              <FaHome size={20} />
-              <span>Inicio</span>
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#"
-              className="flex items-center gap-2 text-white no-underline hover:text-[#1DB954] transition-colors"
-              aria-label="Buscar contenido"
-            >
-              <FaSearch size={20} />
-              <span>Buscar</span>
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#"
-              className="flex items-center gap-2 text-white no-underline hover:text-[#1DB954] transition-colors"
-              aria-label="Ver biblioteca"
-            >
-              <FaHeart size={20} />
-              <span>Biblioteca</span>
-            </a>
-          </li>
-        </ul>
-
-        <button 
-          className="bg-[#1DB954] hover:bg-[#1ed760] text-black font-semibold px-5 py-2 rounded-lg text-sm transition-all"
-          aria-label="Iniciar sesión"
-        >
-          Login
-        </button>
-      </nav>
-    </>
+        Login
+      </button>
+    </nav>
   );
 };
 
