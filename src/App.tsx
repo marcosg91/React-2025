@@ -2,8 +2,8 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Player from "./components/Player";
-import { useState, useCallback } from "react";
-import { usePlayerContext } from "./context/PlayerContext"; 
+import { useCallback } from "react";
+import { usePlayerContext } from "./context/PlayerContext";
 import type { Song } from "./data/Songs";
 
 // Páginas
@@ -26,22 +26,14 @@ const App = () => {
     setVolume,
     handleStop,
     handleClose,
-  } = usePlayerContext(); 
-
-  const [showPlayer, setShowPlayer] = useState(false);
+  } = usePlayerContext();
 
   const handleSongSelect = useCallback(
     (song: Song) => {
       playSong(song);
-      setShowPlayer(true);
     },
     [playSong]
   );
-
-  const closePlayer = useCallback(() => {
-    handleClose();
-    setShowPlayer(false);
-  }, [handleClose]);
 
   const location = useLocation();
 
@@ -78,7 +70,7 @@ const App = () => {
       </div>
 
       {/* Player inferior fijo */}
-      {showPlayer && currentSong && (
+      {currentSong && (
         <Player
           currentSong={currentSong}
           isPlaying={isPlaying}
@@ -88,7 +80,7 @@ const App = () => {
           onSeek={handleSeek}
           onVolumeChange={setVolume}
           onStop={handleStop}
-          onClose={closePlayer}
+          onClose={handleClose}
         />
       )}
     </div>
