@@ -1,21 +1,21 @@
 type PlayIconProps = {
   size?: number;
   color?: string;
-  className?: string; 
+  className?: string;
 };
 
-const PlayIcon = ({ 
-  size = 60, 
-  color = 'white',
-  className = '' 
+const PlayIcon = ({
+  size = 24,
+  color = "currentColor",
+  className = "",
 }: PlayIconProps) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"  
-    viewBox="0 0 24 24"                  
-    fill={color}                        
-    width={`${size}px`}                 
-    height={`${size}px`}
-    className={className} 
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill={color}
+    width={size}
+    height={size}
+    className={className}
   >
     <path d="M8 5v14l11-7z" />
   </svg>

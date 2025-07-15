@@ -81,3 +81,11 @@ a:hover {
 .text-glow {
   text-shadow: 0 0 5px rgba(30, 215, 96, 0.5);
 }
+
+/* === FIX Para que el player NO sea transparente === */
+.fixed.bg-black {
+  background-color: #000000 !important;
+  opacity: 1 !important;
+}
+
+
