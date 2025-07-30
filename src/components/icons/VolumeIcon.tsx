@@ -4,10 +4,10 @@ type VolumeIconProps = {
   className?: string;
 };
 
-const VolumeIcon = ({ 
-  size = 24, 
-  color = 'currentColor',
-  className = ''
+const VolumeIcon = ({
+  size = 24,
+  color = "currentColor",
+  className = "",
 }: VolumeIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
