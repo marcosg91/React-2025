@@ -8,9 +8,8 @@ type Props = {
 
 const ArtistCard = ({ artist }: Props) => {
   return (
-    <a
-      href="#"
-      className="block w-full px-2 pt-2 pb-4 cursor-pointer no-underline group transition-transform duration-200 hover:scale-105"
+    <div
+      className="w-full px-2 pt-2 pb-4 cursor-pointer hover:scale-105 transition-transform group"
     >
       <div className="mx-auto w-[120px] h-[120px] relative">
         <HoverCard
@@ -35,7 +34,7 @@ const ArtistCard = ({ artist }: Props) => {
       <p className="text-text-secondary text-xs text-center">
         {artist.listeners.toLocaleString()} oyentes
       </p>
-    </a>
+    </div>
   );
 };
 

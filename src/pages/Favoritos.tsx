@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFavorites } from "../hooks/useFavorites";
 import SongCard from "../components/SongCard";
 import AnimatedPage from "../components/AnimatedPage";
+import type { Song } from "../types/music";
 
 export default function Favoritos() {
   const { favorites } = useFavorites();
@@ -17,7 +18,7 @@ export default function Favoritos() {
             {favorites.map((song) => (
               <SongCard
                 key={song.id}
-                song={song}
+                song={song as Song}
                 onClick={() => navigate(`/song/${song.id}`)}
               />
             ))}

@@ -1,19 +1,25 @@
-import { useState } from "react";
-import { songs } from "../data/Songs";
-import type { Song } from "../data/Songs";
+import { useState, useMemo } from "react";
+import { useSongs } from "../hooks/useSongs";
+import type { Song } from "../types/music";
 import SongCard from "../components/SongCard";
 import { useNavigate, Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import Loading from "../components/ui/Loading";
+import ErrorMessage from "../components/ui/ErrorMessage";
 
 export default function Search() {
   const [query, setQuery] = useState("");
+  const { data: songs = [], isLoading, isError, error } = useSongs();
   const navigate = useNavigate();
 
-  const filteredSongs: Song[] = songs.filter(
-    (song) =>
-      song.title.toLowerCase().includes(query.toLowerCase()) ||
-      song.artist.toLowerCase().includes(query.toLowerCase())
-  );
+  const filteredSongs: Song[] = useMemo(() => {
+    if (!query) return [];
+    return songs.filter(
+      (song) =>
+        song.title.toLowerCase().includes(query.toLowerCase()) ||
+        song.artist.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [songs, query]);
 
   const handleSuggestionClick = (songId: string) => {
     navigate(`/song/${songId}`);
@@ -25,7 +31,6 @@ export default function Search() {
 
       {/* Campo de búsqueda con ícono */}
       <div className="relative mb-6">
-        {/* Ícono 🔍 */}
         <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
 
         <input
@@ -36,7 +41,6 @@ export default function Search() {
           className="w-full pl-10 p-4 rounded-lg bg-background text-white placeholder-gray-400 border border-neutral-700 focus:outline-none focus:border-primary transition-all"
         />
 
-        {/* Dropdown de sugerencias */}
         {query && filteredSongs.length > 0 && (
           <ul className="absolute left-0 right-0 mt-1 bg-neutral-900 border border-neutral-700 rounded-lg shadow-lg max-h-60 overflow-y-auto z-50">
             {filteredSongs.slice(0, 6).map((song) => (
@@ -46,9 +50,7 @@ export default function Search() {
                 onClick={() => handleSuggestionClick(song.id)}
               >
                 <div>
-                  <p className="text-white text-sm font-semibold">
-                    {song.title}
-                  </p>
+                  <p className="text-white text-sm font-semibold">{song.title}</p>
                   <p className="text-gray-400 text-xs">{song.artist}</p>
                 </div>
                 <img
@@ -62,8 +64,12 @@ export default function Search() {
         )}
       </div>
 
+      {/* Estado de carga / error */}
+      {isLoading && <Loading />}
+      {isError && <ErrorMessage message={error?.message || "Error al cargar canciones"} />}
+
       {/* Resultados completos */}
-      {filteredSongs.length > 0 ? (
+      {!isLoading && !isError && query && filteredSongs.length > 0 ? (
         <div className="flex flex-wrap gap-4">
           {filteredSongs.map((song) => (
             <SongCard
@@ -74,7 +80,9 @@ export default function Search() {
           ))}
         </div>
       ) : (
-        query && <p className="text-gray-400">No se encontraron canciones.</p>
+        query &&
+        filteredSongs.length === 0 &&
+        <p className="text-gray-400">No se encontraron canciones.</p>
       )}
 
       {/* Botón para volver */}
