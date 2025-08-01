@@ -23,6 +23,28 @@ export const getSongs = async (): Promise<Song[]> => {
   }));
 };
 
+export const getSong = async (id: string): Promise<Song> => {
+  const raw = await musicService.getSongById(id);
+  if (!raw) throw new Error('Canción no encontrada');
+
+  return {
+    id: String(raw.id),
+    title: raw.title,
+    artist: raw.artist,
+    album: raw.album,
+    year: Number(raw.year),
+    genre: raw.genre,
+    duration:
+      typeof raw.duration === 'string'
+        ? raw.duration
+        : `${Math.floor(raw.duration / 60)}:${String(raw.duration % 60).padStart(2, '0')}`,
+    rating: raw.rating,
+    description: raw.description,
+    image: raw.cover ?? raw.image,
+    audioUrl: raw.audioUrl ?? '',
+  };
+};
+
 export const getAlbums = async (): Promise<Album[]> => {
   const allSongs = await getSongs();
   const albumMap = new Map<string, Album>();
