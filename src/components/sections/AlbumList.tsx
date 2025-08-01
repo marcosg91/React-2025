@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import AlbumCard from '../AlbumCard';
-import type { Album } from '../../data/Albums';
+import type { Album } from '../../types/music';
 
 type Props = {
   albums: Album[];
@@ -9,7 +9,7 @@ type Props = {
 const AlbumList = ({ albums }: Props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
-  const scrollSpeed = 0.5; // píxeles por frame (~30px/s)
+  const scrollSpeed = 0.5; 
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -19,8 +19,7 @@ const AlbumList = ({ albums }: Props) => {
       if (!container) return;
 
       container.scrollLeft += scrollSpeed;
-
-      // si llegó al final, vuelve al inicio
+    
       if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
         container.scrollLeft = 0;
       }
